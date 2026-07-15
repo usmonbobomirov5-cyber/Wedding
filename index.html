@@ -9,13 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #ebf4f8;           /* Нежный светло-голубой фон */
-      --surface: #ffffff;      /* Белые карточки и блоки */
-      --text-main: #2c3e50;    /* Темно-синий цвет шрифта для отличной читаемости */
-      --text-muted: #5c7487;   /* Мягкий сине-серый для дополнительного текста */
-      --accent: #6a95a8;       /* Элегантный пыльно-голубой акцент */
-      --accent-light: #f0f7fa; /* Очень светлый голубой для выделенных зон */
-      --border: #d4e4eb;       /* Аккуратные светлые рамки */
+      /* Обновленная цветовая палитра в стиле фото (льдисто-голубой и темно-синий) */
+      --bg: #000000;           /* Черный фон за пределами карточки */
+      --surface: #cde1f0;      /* Базовый льдисто-голубой цвет карточки */
+      --text-main: #1d364d;    /* Темно-синий/грифельный для основного текста */
+      --text-muted: #3a5770;   /* Чуть более светлый синий для доп. текста */
+      --accent: #6f95b3;       /* Приглушенный сине-голубой */
+      --accent-light: rgba(255, 255, 255, 0.4); 
+      --border: rgba(255, 255, 255, 0.6); 
     }
 
     * {
@@ -38,86 +39,158 @@
     .wrapper {
       width: 100%;
       max-width: 480px;
-      background: var(--surface);
+      /* Сложный градиент для создания свечения как на фото */
+      background: linear-gradient(135deg, #e3eff7 0%, #bcd6ea 50%, #d4e6f3 100%);
       min-height: 100vh;
-      box-shadow: 0 0 30px rgba(0,0,0,0.05);
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
       position: relative;
       overflow-x: hidden;
       padding-bottom: 60px;
     }
 
     section {
-      padding: 60px 25px;
+      padding: 50px 25px;
       text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* --- HERO SECTION (Обновлено под фото) --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px;
       position: relative;
     }
 
-    .divider-flower {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.2rem;
-      color: var(--accent);
-      margin: 20px 0;
-      user-select: none;
+    /* Стеклянная рамка */
+    .glass-panel {
+      position: relative;
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 60px 20px;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 5px 15px rgba(0,0,0,0.05);
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.5) 0%, transparent 50%);
     }
 
-    /* --- HERO SECTION --- */
-    .hero {
-      background: linear-gradient(180deg, var(--accent-light) 0%, var(--surface) 100%);
-      padding-top: 80px;
-      padding-bottom: 80px;
+    /* Фоновые огромные буквы U & O */
+    .bg-initials {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11rem;
+      color: rgba(255, 255, 255, 0.4);
+      z-index: 0;
+      pointer-events: none;
+      text-shadow: -1px -1px 2px rgba(255,255,255,0.8), 2px 2px 5px rgba(160,190,210,0.3);
+      line-height: 1;
+    }
+
+    /* Имитация веточек (листьев) через SVG */
+    .leaf-deco {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      opacity: 0.15;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .leaf-top-left {
+      top: -10px;
+      left: -20px;
+      transform: rotate(15deg);
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10,90 Q40,50 90,10 Q60,30 50,70 Z" fill="%231d364d"/></svg>') no-repeat center/contain;
+    }
+    .leaf-bottom-right {
+      bottom: -10px;
+      right: -20px;
+      transform: rotate(195deg);
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10,90 Q40,50 90,10 Q60,30 50,70 Z" fill="%231d364d"/></svg>') no-repeat center/contain;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      font-size: 1.1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 4px;
-      color: var(--accent);
-      margin-bottom: 25px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
     }
 
     .names {
-      margin: 20px 0;
+      margin: 15px 0;
     }
 
     .name {
       font-family: 'Cormorant Garamond', serif;
       font-size: 3.2rem;
-      font-weight: 600;
+      font-weight: 400;
       line-height: 1.1;
       color: var(--text-main);
     }
 
+    .amp-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 5px 0;
+    }
+
+    .amp-line {
+      height: 1px;
+      width: 40px;
+      background-color: var(--accent);
+      opacity: 0.5;
+    }
+
     .amp {
       font-family: 'Great Vibes', cursive;
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: var(--accent);
-      display: block;
-      margin: 10px 0;
+      opacity: 0.8;
     }
 
     .hero-date {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      margin-top: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 5px;
+      margin-top: 25px;
       color: var(--text-muted);
     }
 
-    /* --- DETAILS SECTION --- */
-    .details {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    .divider-elegant {
+      margin: 20px auto;
+      width: 50px;
+      height: 15px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 15" xmlns="http://www.w3.org/2000/svg"><path d="M25,0 L27,5 L32,7 L27,9 L25,14 L23,9 L18,7 L23,5 Z" fill="%236f95b3" opacity="0.5"/><line x1="0" y1="7" x2="15" y2="7" stroke="%236f95b3" stroke-width="0.5"/><line x1="35" y1="7" x2="50" y2="7" stroke="%236f95b3" stroke-width="0.5"/></svg>') no-repeat center/contain;
     }
 
-    .details h2 {
+    .hero-subtitle {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      font-size: 2rem;
-      margin-bottom: 25px;
-      letter-spacing: 1px;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-top: 15px;
+    }
+
+    /* --- DETAILS SECTION (Остальные блоки стилизованы под новый цвет) --- */
+    .details {
+      padding-top: 20px;
     }
 
     .details p {
@@ -136,10 +209,11 @@
     }
 
     .info-card {
-      background: var(--accent-light);
+      background: rgba(255, 255, 255, 0.4);
       padding: 20px 15px;
-      border-radius: 4px;
+      border-radius: 10px;
       border: 1px solid var(--border);
+      backdrop-filter: blur(5px);
     }
 
     .info-value {
@@ -150,7 +224,7 @@
     }
 
     .info-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-weight: 600;
@@ -161,8 +235,9 @@
     .venue-card {
       border: 1px solid var(--border);
       padding: 25px 20px;
-      border-radius: 4px;
-      background-color: var(--surface);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
     }
 
     .venue-title {
@@ -189,7 +264,9 @@
 
     /* --- TIMER SECTION --- */
     .timer-section {
-      background: var(--accent-light);
+      background: rgba(255, 255, 255, 0.2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .timer-section h3 {
@@ -207,11 +284,12 @@
     }
 
     .time-block {
-      background: var(--surface);
+      background: rgba(255, 255, 255, 0.6);
       min-width: 70px;
       padding: 15px 5px;
-      border-radius: 4px;
+      border-radius: 10px;
       border: 1px solid var(--border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     }
 
     .time-num {
@@ -266,15 +344,15 @@
       font-size: 1rem;
       font-weight: 500;
       border: 1px solid var(--border);
-      background-color: var(--surface);
-      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
       outline: none;
       transition: border-color 0.3s;
       color: var(--text-main);
     }
 
     .form-control:focus {
-      border-color: var(--accent);
+      border-color: var(--text-main);
     }
 
     .radio-group {
@@ -296,7 +374,7 @@
     .radio-label input {
       width: 18px;
       height: 18px;
-      accent-color: var(--accent);
+      accent-color: var(--text-main);
     }
 
     .btn {
@@ -310,14 +388,15 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 2px;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
       margin-top: 15px;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, transform 0.2s;
     }
 
     .btn:hover {
       background-color: var(--accent);
+      transform: translateY(-2px);
     }
 
     .status-msg {
@@ -328,12 +407,12 @@
     }
 
     .status-msg.success {
-      color: #2e7d32;
+      color: #1e5a22;
       display: block;
     }
 
     .status-msg.error {
-      color: #c62828;
+      color: #9b2020;
       display: block;
     }
 
@@ -354,8 +433,8 @@
       margin-top: 20px;
       padding: 20px;
       border: 1px dashed var(--accent);
-      background: var(--accent-light);
-      border-radius: 4px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 8px;
       text-align: left;
     }
 
@@ -389,19 +468,34 @@
   <div class="wrapper">
     
     <section class="hero">
-      <div class="hero-title">Приглашение на свадьбу</div>
-      <div class="divider-flower">✿</div>
-      <div class="names">
-        <div class="name">Усмонбой</div>
-        <span class="amp">&</span>
-        <div class="name">Оминахон</div>
+      <div class="glass-panel">
+        
+        <div class="leaf-deco leaf-top-left"></div>
+        <div class="leaf-deco leaf-bottom-right"></div>
+        <div class="bg-initials">U<span style="font-size: 8rem; margin-left: -20px;">&</span>O</div>
+        
+        <div class="hero-content">
+          <div class="hero-title">Приглашение на свадьбу</div>
+          
+          <div class="names">
+            <div class="name">Усмонбой</div>
+            <div class="amp-wrapper">
+              <span class="amp-line"></span>
+              <span class="amp">&</span>
+              <span class="amp-line"></span>
+            </div>
+            <div class="name">Оминахон</div>
+          </div>
+          
+          <div class="hero-date">27 . 07 . 2026</div>
+          <div class="divider-elegant"></div>
+          
+          <div class="hero-subtitle">Дорогие близкие и<br>друзья!</div>
+        </div>
       </div>
-      <div class="divider-flower">✿</div>
-      <div class="hero-date">27.07.2026</div>
     </section>
 
     <section class="details">
-      <h2>Дорогие близкие и друзья!</h2>
       <p>Один из самых счастливых дней в нашей жизни станет ещё прекраснее, если вы разделите его вместе с нами. С огромным удовольствием приглашаем вас на торжество, посвящённое созданию нашей семьи!</p>
       
       <div class="info-grid">
@@ -587,7 +681,7 @@
 
       container.innerHTML = guests.map(g => `
         <div class="guest-item">
-          <strong>${g.name}</strong> — <span style="color: ${g.attendance.includes('приду') ? '#2e7d32' : '#c62828'}">${g.attendance}</span>
+          <strong>${g.name}</strong> — <span style="color: ${g.attendance.includes('приду') ? '#1e5a22' : '#9b2020'}">${g.attendance}</span>
         </div>
       `).join('');
     }
@@ -611,5 +705,3 @@
   </script>
 </body>
 </html>
-
-
