@@ -669,12 +669,12 @@
   </div>
 
   <script>
-    // --- ДАННЫЕ ДЛЯ БОТА И ХРАНИЛИЩА (НЕТРОНУТО!) ---
-    const TELEGRAM_BOT_TOKEN = 8795036393:AAHtG-njRIoOjtYA4hW2gomt0JyqU0i2h8M
-    const TELEGRAM_CHAT_ID = '1866545203'; 
+    // --- ДАННЫЕ ДЛЯ БОТА И ХРАНИЛИЩА ---
+    const TELEGRAM_BOT_TOKEN = '8795036393:AAHtG-njRIoOjtYA4hW2gomt0JyqU0i2h8M'; 
+    const TELEGRAM_CHAT_ID = '7906070415'; 
     const LOCAL_STORAGE_KEY = 'wedding_guest_responses_new';
 
-    // --- ТАЙМЕР ОБРАТНОГО ОТСЧЕТА (НЕТРОНУТО!) ---
+    // --- ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ---
     const weddingDate = new Date('2026-07-27T19:00:00');
 
     function updateCountdown() {
@@ -700,7 +700,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // --- ОТПРАВКА RSVP ФОРМЫ (НЕТРОНУТО!) ---
+    // --- ОТПРАВКА RSVP ФОРМЫ ---
     const rsvpForm = document.getElementById('rsvp-form');
     const statusMsg = document.getElementById('status-message');
     const submitBtn = document.getElementById('submit-btn');
@@ -748,7 +748,7 @@
       }
     });
 
-    // Функция сохранения списка локально (НЕТРОНУТО!)
+    // Функция сохранения списка локально
     function saveGuestLocal(name, attendance) {
       let guests = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
       if (!guests.some(g => g.name.toLowerCase() === name.toLowerCase())) {
@@ -758,7 +758,7 @@
       renderGuestList();
     }
 
-    // Отображение списка гостей на сайте (НЕТРОНУТО!)
+    // Отображение списка гостей на сайте
     function renderGuestList() {
       const container = document.getElementById('guests-container');
       const guests = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
@@ -775,7 +775,7 @@
       `).join('');
     }
 
-    // Показ панели администратора (НЕТРОНУТО!)
+    // Показ панели администратора
     function toggleAdminPanel() {
       const panel = document.getElementById('admin-panel');
       
