@@ -9,13 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Цветовая палитра под ваше фото (светло-голубой, глубокий синий) */
-      --bg-color: #d1dee8; 
-      --text-main: #1e3a5f; 
-      --text-muted: #5a7594;
-      --glass-bg: rgba(255, 255, 255, 0.25);
-      --glass-border: rgba(255, 255, 255, 0.6);
-      --shadow: 0 10px 40px rgba(30, 58, 95, 0.1);
+      /* Точные цвета с вашего фото */
+      --bg-color: #d7e5f0; 
+      --text-main: #20364b; /* Глубокий синий для имен и приветствия */
+      --text-accent: #8198ae; /* Светло-синий для & и линий */
+      --text-muted: #607d96; /* Цвет для мелкого текста и даты */
+      
+      --glass-bg: rgba(255, 255, 255, 0.15); /* Более прозрачное стекло, как на фото */
+      --glass-border: rgba(255, 255, 255, 0.7);
+      --glass-highlight: rgba(255, 255, 255, 0.4);
+      --shadow: 0 10px 40px rgba(32, 54, 75, 0.1);
     }
 
     * { 
@@ -26,10 +29,10 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      /* Фон: Вы можете раскомментировать строку ниже и указать путь к вашей картинке с листьями */
-      /* background-image: url('image.png'); */
+      /* Вставьте имя вашего файла (например, image_2.png) внутри url() чтобы фон был 1в1 как на картинке */
+      /* background-image: url('image_2.png'); */
       background-color: var(--bg-color);
-      background-image: linear-gradient(135deg, #e6eff5 0%, #c4d7e6 100%);
+      background-image: linear-gradient(135deg, #e3edf5 0%, #bacfe3 100%);
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -64,9 +67,9 @@
     .delay-1 { transition-delay: 0.2s; }
     .delay-2 { transition-delay: 0.4s; }
 
-    /* Эффект стекла (Glassmorphism) для всех блоков */
+    /* Общий эффект стекла для блоков ниже главного экрана */
     .glass-card {
-      background: var(--glass-bg);
+      background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       border: 1px solid var(--glass-border);
@@ -78,28 +81,56 @@
       overflow: hidden;
     }
 
-    /* --- ГЛАВНЫЙ ЭКРАН (КАК НА ФОТО) --- */
+    /* --- ГЛАВНЫЙ ЭКРАН (ТОЧНАЯ КОПИЯ ФОТО) --- */
     .hero {
+      position: relative;
       min-height: 85vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       margin-top: 3vh;
+      
+      /* Имитация стеклянной рамки с фото */
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: 
+        inset 0 0 20px rgba(255, 255, 255, 0.5),
+        0 8px 32px rgba(0, 0, 0, 0.05);
+      padding: 40px 20px;
+      text-align: center;
     }
 
+    /* Внутренний блик рамки, как на фото */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      border: 1px solid var(--glass-highlight);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    /* Водяной знак U&O на заднем плане (если нет картинки фона) */
     .monogram-bg {
       position: absolute;
-      top: 35%;
+      top: 30%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-family: 'Cormorant Garamond', serif;
-      font-size: 15rem;
-      color: rgba(255, 255, 255, 0.45);
+      font-size: 14rem;
+      color: rgba(255, 255, 255, 0.35);
       z-index: 0;
       pointer-events: none;
       line-height: 1;
-      letter-spacing: -15px;
+      letter-spacing: -10px;
+      text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
     }
 
     .hero-content {
@@ -112,53 +143,84 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 0.65rem;
       text-transform: uppercase;
-      letter-spacing: 5px;
+      letter-spacing: 4px;
       margin-bottom: 25px;
       color: var(--text-muted);
+      font-weight: 500;
     }
 
     .name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3.2rem;
-      font-weight: 500;
+      font-size: 3.4rem;
+      font-weight: 400;
       color: var(--text-main);
-      line-height: 1;
+      line-height: 1.1;
+    }
+
+    /* Блок с амперсандом и линиями */
+    .amp-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 10px 0;
+    }
+    
+    .amp-line {
+      height: 1px;
+      width: 45px;
+      background-color: var(--text-accent);
+      opacity: 0.6;
     }
 
     .amp {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
-      color: var(--text-muted);
+      font-size: 2.6rem;
+      color: var(--text-accent);
       font-style: italic;
-      margin: 10px 0;
-      opacity: 0.8;
+      font-weight: 300;
+    }
+
+    /* Блок с датой и орнаментом */
+    .hero-date-container {
+      margin: 35px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
 
     .hero-date {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
-      letter-spacing: 7px;
-      margin: 35px 0;
+      font-size: 0.85rem;
+      letter-spacing: 6px;
       color: var(--text-muted);
-      position: relative;
-      display: inline-block;
+      font-weight: 500;
     }
     
-    .hero-date::before, .hero-date::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      width: 40px;
-      height: 1px;
-      background: var(--text-muted);
-      opacity: 0.3;
+    .date-ornament {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .hero-date::before { right: 100%; margin-right: 15px; }
-    .hero-date::after { left: 100%; margin-left: 15px; }
+    
+    .date-line {
+      width: 35px;
+      height: 1px;
+      background-color: var(--text-muted);
+      opacity: 0.4;
+    }
+    
+    .date-icon {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
 
     .hero-greeting {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
+      font-weight: 400;
       color: var(--text-main);
       line-height: 1.4;
     }
@@ -172,16 +234,29 @@
     }
 
     .icon { font-size: 1.8rem; margin-bottom: 10px; }
-    .info-value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; }
-    .info-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-top: 5px; }
+    .info-value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-main); }
+    .info-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-top: 5px; font-weight: 500; }
     
-    .venue-card { margin-top: 15px; }
-    .venue-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500; margin: 10px 0; }
+    .time-block {
+      background: rgba(255,255,255,0.3);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      width: 100%;
+      height: auto;
+      padding: 25px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .venue-card { margin-top: 15px; padding: 30px 15px; }
+    .venue-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500; margin: 10px 0; color: var(--text-main); }
     .venue-addr { font-size: 0.95rem; color: var(--text-muted); }
 
     /* --- ТАЙМЕР --- */
     .countdown { display: flex; justify-content: center; gap: 10px; margin-top: 25px; }
-    .time-block {
+    .timer-item {
       background: rgba(255,255,255,0.3);
       border: 1px solid var(--glass-border);
       border-radius: 18px;
@@ -192,7 +267,7 @@
       justify-content: center;
       align-items: center;
     }
-    .time-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; line-height: 1; }
+    .time-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; line-height: 1; color: var(--text-main); }
     .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-top: 5px; }
 
     /* --- ФОРМА --- */
@@ -215,7 +290,7 @@
     .form-control::placeholder { color: #8ba2b8; }
     
     .radio-group { display: flex; flex-direction: column; gap: 15px; }
-    .radio-label { display: flex; align-items: center; gap: 12px; font-size: 1rem; cursor: pointer; color: var(--text-main); }
+    .radio-label { display: flex; align-items: center; gap: 12px; font-size: 1rem; cursor: pointer; color: var(--text-main); font-weight: 500; }
     
     .btn {
       width: 100%;
@@ -235,7 +310,7 @@
     }
     .btn:hover { background-color: var(--text-muted); transform: translateY(-2px); }
 
-    .status-msg { margin-top: 20px; font-size: 0.95rem; display: none; }
+    .status-msg { margin-top: 20px; font-size: 0.95rem; display: none; font-weight: 500; }
     .status-msg.success { color: #2e7d32; display: block; }
     .status-msg.error { color: #c62828; display: block; }
     
@@ -243,7 +318,7 @@
     .admin-trigger { background: none; border: none; color: var(--text-muted); font-size: 0.75rem; cursor: pointer; margin-top: 30px; letter-spacing: 1px; }
     .guest-list-modal { display: none; margin-top: 20px; text-align: left; }
     .guest-list-modal.active { display: block; }
-    .guest-item { padding: 12px 0; border-bottom: 1px solid var(--glass-border); font-size: 0.95rem; }
+    .guest-item { padding: 12px 0; border-bottom: 1px solid var(--glass-border); font-size: 0.95rem; color: var(--text-main); }
     .guest-item:last-child { border-bottom: none; }
   </style>
 </head>
@@ -252,16 +327,31 @@
   <div class="wrapper">
     
     <!-- ГЛАВНЫЙ ЭКРАН -->
-    <section class="hero glass-card fade-up">
+    <section class="hero fade-up">
+      <!-- Монограмма на фоне -->
       <div class="monogram-bg">U&O</div>
+      
       <div class="hero-content">
         <div class="hero-subtitle">Приглашение на свадьбу</div>
         
         <div class="name">Усмонбой</div>
-        <div class="amp">&</div>
+        
+        <div class="amp-container">
+          <div class="amp-line"></div>
+          <div class="amp">&</div>
+          <div class="amp-line"></div>
+        </div>
+        
         <div class="name">Оминахон</div>
         
-        <div class="hero-date">27.07.2026</div>
+        <div class="hero-date-container">
+          <div class="hero-date">27.07.2026</div>
+          <div class="date-ornament">
+            <div class="date-line"></div>
+            <div class="date-icon">❖</div>
+            <div class="date-line"></div>
+          </div>
+        </div>
         
         <div class="hero-greeting">
           Дорогие близкие и<br>друзья!
@@ -271,22 +361,22 @@
 
     <!-- ИНФОРМАЦИЯ О СВАДЬБЕ -->
     <section class="glass-card fade-up delay-1">
-      <p style="margin-bottom: 25px; color: var(--text-muted); font-size: 0.95rem;">С огромным удовольствием приглашаем вас разделить с нами этот особенный день!</p>
+      <p style="margin-bottom: 25px; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">С огромным удовольствием приглашаем вас разделить с нами этот особенный день!</p>
       
       <div class="info-grid">
-        <div class="time-block" style="width:100%; height:auto; padding:25px 10px;">
+        <div class="time-block">
           <div class="icon">📅</div>
           <div class="info-value">27 июля</div>
           <div class="info-label">Понедельник</div>
         </div>
-        <div class="time-block" style="width:100%; height:auto; padding:25px 10px;">
+        <div class="time-block">
           <div class="icon">🕒</div>
           <div class="info-value">19:00</div>
           <div class="info-label">Сбор гостей</div>
         </div>
       </div>
 
-      <div class="venue-card time-block" style="width:100%; height:auto; padding:30px 15px;">
+      <div class="venue-card time-block">
         <div class="icon">📍</div>
         <div class="info-label" style="margin-bottom: 5px;">Место проведения</div>
         <div class="venue-name">Ресторан «Хосият»</div>
@@ -296,21 +386,21 @@
 
     <!-- ТАЙМЕР -->
     <section class="glass-card fade-up delay-1">
-      <div style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin-bottom: 10px; color: var(--text-main);">Ждем вас через:</div>
+      <div style="font-family: 'Cormorant Garamond'; font-size: 2.2rem; margin-bottom: 10px; color: var(--text-main);">Ждем вас через:</div>
       <div class="countdown" id="countdown">
-        <div class="time-block">
+        <div class="timer-item">
           <span class="time-num" id="days">00</span>
           <span class="time-label">дн</span>
         </div>
-        <div class="time-block">
+        <div class="timer-item">
           <span class="time-num" id="hours">00</span>
           <span class="time-label">час</span>
         </div>
-        <div class="time-block">
+        <div class="timer-item">
           <span class="time-num" id="minutes">00</span>
           <span class="time-label">мин</span>
         </div>
-        <div class="time-block">
+        <div class="timer-item">
           <span class="time-num" id="seconds">00</span>
           <span class="time-label">сек</span>
         </div>
@@ -319,8 +409,8 @@
 
     <!-- ФОРМА ОТВЕТА -->
     <section class="glass-card fade-up delay-2">
-      <h3 style="font-family: 'Cormorant Garamond'; font-size: 2.2rem; margin-bottom: 10px; color: var(--text-main);">RSVP</h3>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 30px;">Пожалуйста, подтвердите ваше присутствие до 20 июля</p>
+      <h3 style="font-family: 'Cormorant Garamond'; font-size: 2.4rem; margin-bottom: 10px; color: var(--text-main);">RSVP</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 30px; font-weight: 500;">Пожалуйста, подтвердите ваше присутствие до 20 июля</p>
       
       <form id="rsvp-form">
         <div class="form-group">
@@ -350,7 +440,7 @@
       <button class="admin-trigger" onclick="toggleAdminPanel()">Список гостей</button>
       <div class="guest-list-modal" id="admin-panel">
         <h4 style="margin-bottom: 15px; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--text-main);">Список ответивших:</h4>
-        <div id="guests-container" style="color: var(--text-main);">Список пуст.</div>
+        <div id="guests-container">Список пуст.</div>
       </div>
     </section>
 
@@ -500,4 +590,3 @@
   </script>
 </body>
 </html>
-
