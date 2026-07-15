@@ -6,131 +6,100 @@
   <title>Усмонбой & Оминахон — Свадебное приглашение</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Точные цвета с вашего фото */
-      --bg-color: #d7e5f0; 
-      --text-main: #20364b; /* Глубокий синий для имен и приветствия */
-      --text-accent: #8198ae; /* Светло-синий для & и линий */
-      --text-muted: #607d96; /* Цвет для мелкого текста и даты */
-      
-      --glass-bg: rgba(255, 255, 255, 0.15); /* Более прозрачное стекло, как на фото */
-      --glass-border: rgba(255, 255, 255, 0.7);
-      --glass-highlight: rgba(255, 255, 255, 0.4);
-      --shadow: 0 10px 40px rgba(32, 54, 75, 0.1);
+      /* Премиальная палитра: светлый шелковый градиент, глубокий синий текст, серебристо-голубые акценты */
+      --bg-light: #ffffff;
+      --bg-gradient: linear-gradient(135deg, #ffffff 0%, #edf1f4 100%);
+      --text-main: #14212b; /* Насыщенный тёмно-синий */
+      --text-muted: #647480;
+      --accent: #8ea3af; /* Серебристо-голубой */
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.8);
+      --shadow: 0 10px 40px rgba(20, 33, 43, 0.06);
     }
 
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
       font-family: 'Montserrat', sans-serif;
-      /* Вставьте имя вашего файла (например, image_2.png) внутри url() чтобы фон был 1в1 как на картинке */
-      /* background-image: url('image_2.png'); */
-      background-color: var(--bg-color);
-      background-image: linear-gradient(135deg, #e3edf5 0%, #bacfe3 100%);
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background: var(--bg-gradient);
       color: var(--text-main);
       line-height: 1.6;
       display: flex;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
     .wrapper {
       width: 100%;
-      max-width: 500px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      margin-bottom: 40px;
+      max-width: 480px;
+      background: transparent;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 60px;
     }
 
-    /* Анимации плавного появления */
+    /* Анимации появления */
     .fade-up {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 1s ease-out, transform 1s ease-out;
+      transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .fade-up.visible { 
-      opacity: 1; 
-      transform: translateY(0); 
+    
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
+
     .delay-1 { transition-delay: 0.2s; }
     .delay-2 { transition-delay: 0.4s; }
+    .delay-3 { transition-delay: 0.6s; }
 
-    /* Общий эффект стекла для блоков ниже главного экрана */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid var(--glass-border);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 40px 20px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    /* Элегантный разделитель */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      width: 50%;
+      margin: 30px auto;
+      opacity: 0.5;
     }
 
-    /* --- ГЛАВНЫЙ ЭКРАН (ТОЧНАЯ КОПИЯ ФОТО) --- */
+    /* --- HERO SECTION --- */
     .hero {
       position: relative;
-      min-height: 85vh;
+      height: 100vh; /* На всю высоту экрана */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-top: 3vh;
-      
-      /* Имитация стеклянной рамки с фото */
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      box-shadow: 
-        inset 0 0 20px rgba(255, 255, 255, 0.5),
-        0 8px 32px rgba(0, 0, 0, 0.05);
-      padding: 40px 20px;
       text-align: center;
+      padding: 20px;
+      overflow: hidden;
     }
 
-    /* Внутренний блик рамки, как на фото */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      right: 6px;
-      bottom: 6px;
-      border: 1px solid var(--glass-highlight);
-      border-radius: 14px;
-      pointer-events: none;
-    }
-
-    /* Водяной знак U&O на заднем плане (если нет картинки фона) */
+    /* Огромная монограмма на фоне */
     .monogram-bg {
       position: absolute;
-      top: 30%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-family: 'Cormorant Garamond', serif;
-      font-size: 14rem;
-      color: rgba(255, 255, 255, 0.35);
+      font-size: 18rem;
+      color: var(--accent);
+      opacity: 0.05;
       z-index: 0;
       pointer-events: none;
       line-height: 1;
-      letter-spacing: -10px;
-      text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+      white-space: nowrap;
     }
 
     .hero-content {
@@ -139,159 +108,295 @@
       width: 100%;
     }
 
-    .hero-subtitle {
+    .hero-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      margin-bottom: 25px;
-      color: var(--text-muted);
       font-weight: 500;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .names-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
     }
 
     .name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3.4rem;
+      font-size: 3.8rem;
       font-weight: 400;
+      line-height: 1;
       color: var(--text-main);
-      line-height: 1.1;
     }
 
-    /* Блок с амперсандом и линиями */
-    .amp-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      margin: 10px 0;
+    .name-1 {
+      margin-left: -30px;
     }
-    
-    .amp-line {
-      height: 1px;
-      width: 45px;
-      background-color: var(--text-accent);
-      opacity: 0.6;
+
+    .name-2 {
+      margin-right: -30px;
     }
 
     .amp {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.6rem;
-      color: var(--text-accent);
-      font-style: italic;
-      font-weight: 300;
-    }
-
-    /* Блок с датой и орнаментом */
-    .hero-date-container {
-      margin: 35px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: var(--accent);
+      margin: -15px 0;
+      text-shadow: 0 0 20px rgba(142, 163, 175, 0.4);
+      z-index: 2;
     }
 
     .hero-date {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 6px;
-      color: var(--text-muted);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
       font-weight: 500;
+      letter-spacing: 4px;
+      margin-top: 40px;
+      color: var(--text-muted);
     }
-    
-    .date-ornament {
+
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      animation: bounce 2s infinite;
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 10px;
-    }
-    
-    .date-line {
-      width: 35px;
-      height: 1px;
-      background-color: var(--text-muted);
-      opacity: 0.4;
-    }
-    
-    .date-icon {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      opacity: 0.6;
+      z-index: 1;
     }
 
-    .hero-greeting {
+    .scroll-arrow {
+      height: 40px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -10px); }
+      60% { transform: translate(-50%, -5px); }
+    }
+
+    /* --- СЕКЦИИ --- */
+    section {
+      padding: 80px 25px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* --- DETAILS SECTION --- */
+    .details h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.7rem;
-      font-weight: 400;
-      color: var(--text-main);
-      line-height: 1.4;
+      font-weight: 500;
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      line-height: 1.2;
     }
 
-    /* --- БЛОК С ИНФОРМАЦИЕЙ --- */
+    .details p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 50px;
+      padding: 0 10px;
+      font-weight: 400;
+    }
+
     .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
-      margin-top: 25px;
+      margin-bottom: 15px;
     }
 
-    .icon { font-size: 1.8rem; margin-bottom: 10px; }
-    .info-value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-main); }
-    .info-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-top: 5px; font-weight: 500; }
-    
-    .time-block {
-      background: rgba(255,255,255,0.3);
+    .info-card, .venue-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 25px 15px;
+      border-radius: 16px;
       border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      width: 100%;
-      height: auto;
-      padding: 25px 10px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .info-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-top: 5px;
+    }
+
+    .venue-card {
+      padding: 30px 20px;
+    }
+
+    .venue-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin: 5px 0 10px 0;
+    }
+
+    .venue-addr {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* --- TIMER SECTION --- */
+    .timer-section {
+      position: relative;
+    }
+
+    .timer-section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 40px;
+    }
+
+    .countdown {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
+      gap: 12px;
     }
 
-    .venue-card { margin-top: 15px; padding: 30px 15px; }
-    .venue-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500; margin: 10px 0; color: var(--text-main); }
-    .venue-addr { font-size: 0.95rem; color: var(--text-muted); }
-
-    /* --- ТАЙМЕР --- */
-    .countdown { display: flex; justify-content: center; gap: 10px; margin-top: 25px; }
-    .timer-item {
-      background: rgba(255,255,255,0.3);
-      border: 1px solid var(--glass-border);
-      border-radius: 18px;
+    .time-block {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       width: 75px;
       height: 75px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
-    .time-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; line-height: 1; color: var(--text-main); }
-    .time-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-top: 5px; }
 
-    /* --- ФОРМА --- */
-    .form-group { margin-bottom: 25px; text-align: left; }
-    .form-group label { display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-    
+    .time-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--text-main);
+    }
+
+    .time-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    /* --- FORM SECTION --- */
+    .form-wrapper {
+      background: var(--bg-light);
+      padding: 40px 25px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .form-section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .form-section p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
     .form-control {
       width: 100%;
       padding: 16px;
       font-family: 'Montserrat', sans-serif;
       font-size: 1rem;
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
-      background: rgba(255,255,255,0.5);
+      border: none;
+      border-bottom: 1px solid rgba(142, 163, 175, 0.4);
+      background: transparent;
       outline: none;
+      transition: border-color 0.3s, background-color 0.3s;
       color: var(--text-main);
-      transition: 0.3s;
     }
-    .form-control:focus { background: rgba(255,255,255,0.8); }
-    .form-control::placeholder { color: #8ba2b8; }
     
-    .radio-group { display: flex; flex-direction: column; gap: 15px; }
-    .radio-label { display: flex; align-items: center; gap: 12px; font-size: 1rem; cursor: pointer; color: var(--text-main); font-weight: 500; }
-    
+    .form-control::placeholder {
+      color: #aebbc4;
+    }
+
+    .form-control:focus {
+      border-bottom: 1px solid var(--text-main);
+      background-color: rgba(255,255,255,0.5);
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    .radio-label input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--text-main);
+    }
+
     .btn {
       width: 100%;
       background-color: var(--text-main);
@@ -302,152 +407,181 @@
       font-size: 0.85rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      border-radius: 14px;
+      letter-spacing: 3px;
+      border-radius: 50px; /* Овальная элегантная кнопка */
       cursor: pointer;
-      transition: 0.4s;
-      margin-top: 15px;
+      margin-top: 10px;
+      transition: background-color 0.4s, transform 0.4s;
     }
-    .btn:hover { background-color: var(--text-muted); transform: translateY(-2px); }
 
-    .status-msg { margin-top: 20px; font-size: 0.95rem; display: none; font-weight: 500; }
+    .btn:hover {
+      background-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .status-msg {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      display: none;
+    }
     .status-msg.success { color: #2e7d32; display: block; }
     .status-msg.error { color: #c62828; display: block; }
+
+    /* --- ADMIN SECTION --- */
+    .admin-trigger {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      margin-top: 40px;
+      transition: color 0.3s;
+    }
     
-    /* АДМИН ПАНЕЛЬ */
-    .admin-trigger { background: none; border: none; color: var(--text-muted); font-size: 0.75rem; cursor: pointer; margin-top: 30px; letter-spacing: 1px; }
-    .guest-list-modal { display: none; margin-top: 20px; text-align: left; }
+    .admin-trigger:hover {
+      color: var(--text-main);
+    }
+
+    .guest-list-modal {
+      display: none;
+      margin-top: 20px;
+      padding: 25px;
+      background: var(--bg-light);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+
     .guest-list-modal.active { display: block; }
-    .guest-item { padding: 12px 0; border-bottom: 1px solid var(--glass-border); font-size: 0.95rem; color: var(--text-main); }
+    .guest-item { padding: 12px 0; border-bottom: 1px solid rgba(142, 163, 175, 0.2); font-size: 0.9rem; }
     .guest-item:last-child { border-bottom: none; }
+
+    .footer {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--accent);
+      margin-top: 60px;
+    }
   </style>
 </head>
 <body>
 
   <div class="wrapper">
     
-    <!-- ГЛАВНЫЙ ЭКРАН -->
-    <section class="hero fade-up">
-      <!-- Монограмма на фоне -->
-      <div class="monogram-bg">U&O</div>
-      
-      <div class="hero-content">
-        <div class="hero-subtitle">Приглашение на свадьбу</div>
-        
-        <div class="name">Усмонбой</div>
-        
-        <div class="amp-container">
-          <div class="amp-line"></div>
-          <div class="amp">&</div>
-          <div class="amp-line"></div>
+    <section class="hero">
+      <div class="monogram-bg fade-up">U&O</div>
+      <div class="hero-content fade-up delay-1">
+        <div class="hero-title">Приглашение на свадьбу</div>
+        <div class="names-layout">
+          <div class="name name-1">Усмонбой</div>
+          <span class="amp">&</span>
+          <div class="name name-2">Оминахон</div>
         </div>
-        
-        <div class="name">Оминахон</div>
-        
-        <div class="hero-date-container">
-          <div class="hero-date">27.07.2026</div>
-          <div class="date-ornament">
-            <div class="date-line"></div>
-            <div class="date-icon">❖</div>
-            <div class="date-line"></div>
-          </div>
-        </div>
-        
-        <div class="hero-greeting">
-          Дорогие близкие и<br>друзья!
-        </div>
+        <div class="hero-date">27.07.2026</div>
+      </div>
+      <div class="scroll-down fade-up delay-2">
+        <span>Листайте вниз</span>
+        <div class="scroll-arrow"></div>
       </div>
     </section>
 
-    <!-- ИНФОРМАЦИЯ О СВАДЬБЕ -->
-    <section class="glass-card fade-up delay-1">
-      <p style="margin-bottom: 25px; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">С огромным удовольствием приглашаем вас разделить с нами этот особенный день!</p>
+    <section class="details">
+      <h2 class="fade-up">Дорогие близкие и друзья!</h2>
+      <p class="fade-up delay-1">Один из самых счастливых дней в нашей жизни станет ещё прекраснее, если вы разделите его вместе с нами. С огромным удовольствием приглашаем вас на торжество, посвящённое созданию нашей семьи!</p>
       
       <div class="info-grid">
-        <div class="time-block">
+        <div class="info-card fade-up delay-1">
           <div class="icon">📅</div>
-          <div class="info-value">27 июля</div>
-          <div class="info-label">Понедельник</div>
+          <div class="info-value">Пн, 27 июля</div>
+          <div class="info-label">Дата</div>
         </div>
-        <div class="time-block">
+        <div class="info-card fade-up delay-2">
           <div class="icon">🕒</div>
           <div class="info-value">19:00</div>
-          <div class="info-label">Сбор гостей</div>
+          <div class="info-label">Время начала</div>
         </div>
       </div>
 
-      <div class="venue-card time-block">
+      <div class="venue-card fade-up delay-3">
         <div class="icon">📍</div>
-        <div class="info-label" style="margin-bottom: 5px;">Место проведения</div>
+        <div class="venue-title">Место проведения</div>
         <div class="venue-name">Ресторан «Хосият»</div>
         <div class="venue-addr">г. Канибадам<br>ул. Мирзо Турсунзода</div>
       </div>
+      
+      <div class="divider fade-up delay-3"></div>
     </section>
 
-    <!-- ТАЙМЕР -->
-    <section class="glass-card fade-up delay-1">
-      <div style="font-family: 'Cormorant Garamond'; font-size: 2.2rem; margin-bottom: 10px; color: var(--text-main);">Ждем вас через:</div>
-      <div class="countdown" id="countdown">
-        <div class="timer-item">
+    <section class="timer-section">
+      <h3 class="fade-up">До нашей свадьбы осталось:</h3>
+      <div class="countdown fade-up delay-1" id="countdown">
+        <div class="time-block">
           <span class="time-num" id="days">00</span>
           <span class="time-label">дн</span>
         </div>
-        <div class="timer-item">
+        <div class="time-block">
           <span class="time-num" id="hours">00</span>
           <span class="time-label">час</span>
         </div>
-        <div class="timer-item">
+        <div class="time-block">
           <span class="time-num" id="minutes">00</span>
           <span class="time-label">мин</span>
         </div>
-        <div class="timer-item">
+        <div class="time-block">
           <span class="time-num" id="seconds">00</span>
           <span class="time-label">сек</span>
         </div>
       </div>
+      <div class="divider fade-up delay-2" style="margin-top: 60px;"></div>
     </section>
 
-    <!-- ФОРМА ОТВЕТА -->
-    <section class="glass-card fade-up delay-2">
-      <h3 style="font-family: 'Cormorant Garamond'; font-size: 2.4rem; margin-bottom: 10px; color: var(--text-main);">RSVP</h3>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 30px; font-weight: 500;">Пожалуйста, подтвердите ваше присутствие до 20 июля</p>
-      
-      <form id="rsvp-form">
-        <div class="form-group">
-          <label for="guest-name">Ваши имя и фамилия</label>
-          <input type="text" id="guest-name" class="form-control" placeholder="Например, Парвиз Алиев" required>
-        </div>
-
-        <div class="form-group">
-          <label>Сможете ли вы прийти?</label>
-          <div class="radio-group">
-            <label class="radio-label">
-              <input type="radio" name="attendance" value="Да, с радостью приду" checked>
-              Да, с радостью приду
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="attendance" value="К сожалению, не смогу">
-              К сожалению, не смогу
-            </label>
+    <section class="form-section">
+      <div class="form-wrapper fade-up">
+        <h3>Подтверждение присутствия</h3>
+        <p>Пожалуйста, подтвердите ваше участие до 20 июля, чтобы мы могли комфортно организовать праздник.</p>
+        
+        <form id="rsvp-form">
+          <div class="form-group">
+            <label for="guest-name">Ваше имя и фамилия</label>
+            <input type="text" id="guest-name" class="form-control" placeholder="Например, Парвиз Алиев" required>
           </div>
-        </div>
 
-        <button type="submit" class="btn" id="submit-btn">Отправить ответ</button>
-      </form>
-      <div id="status-message" class="status-msg"></div>
-      
-      <!-- СКРЫТАЯ АДМИН-ПАНЕЛЬ -->
-      <button class="admin-trigger" onclick="toggleAdminPanel()">Список гостей</button>
-      <div class="guest-list-modal" id="admin-panel">
-        <h4 style="margin-bottom: 15px; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--text-main);">Список ответивших:</h4>
-        <div id="guests-container">Список пуст.</div>
+          <div class="form-group">
+            <label>Придете ли вы?</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="attendance" value="Да, с радостью приду" checked>
+                Да, с радостью приду
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="attendance" value="К сожалению, не смогу">
+                К сожалению, не смогу
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn" id="submit-btn">Отправить ответ</button>
+        </form>
+        <div id="status-message" class="status-msg"></div>
       </div>
+
+      <button class="admin-trigger fade-up" onclick="toggleAdminPanel()">Список гостей</button>
+      
+      <div class="guest-list-modal" id="admin-panel">
+        <h4 style="margin-bottom: 15px; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;">Список ответивших:</h4>
+        <div id="guests-container">Список пуст. Станьте первым!</div>
+      </div>
+
+      <div class="footer fade-up">Ждем вас на нашем празднике!</div>
     </section>
 
   </div>
 
   <script>
-    // Плавная анимация при прокрутке
+    // --- ПЛАВНОЕ ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ ---
     document.addEventListener("DOMContentLoaded", function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -463,16 +597,16 @@
       
       // Сразу показываем первый экран
       setTimeout(() => {
-        document.querySelectorAll('.hero.fade-up').forEach(el => el.classList.add('visible'));
+        document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
       }, 100);
     });
 
-    // Настройки Telegram бота
+    // --- ДАННЫЕ ДЛЯ БОТА И ХРАНИЛИЩА ---
     const TELEGRAM_BOT_TOKEN = '8926436599:AAGMB-CSi4OorDtql5JYqeS3HUA-8kLQaqY'; 
     const TELEGRAM_CHAT_ID = '7906070415'; 
     const LOCAL_STORAGE_KEY = 'wedding_guest_responses_new';
 
-    // Таймер обратного отсчета
+    // --- ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ---
     const weddingDate = new Date('2026-07-27T19:00:00');
 
     function updateCountdown() {
@@ -480,7 +614,7 @@
       const difference = weddingDate - now;
 
       if (difference <= 0) {
-        document.getElementById('countdown').innerHTML = "<div style='font-family: Cormorant Garamond; font-size: 1.8rem; color: var(--text-main);'>Торжество началось! 🎉</div>";
+        document.getElementById('countdown').innerHTML = "<h4 style='font-family: Cormorant Garamond; font-size: 1.5rem;'>Торжество началось! 🎉</h4>";
         return;
       }
 
@@ -498,7 +632,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Отправка формы (RSVP)
+    // --- ОТПРАВКА RSVP ФОРМЫ ---
     const rsvpForm = document.getElementById('rsvp-form');
     const statusMsg = document.getElementById('status-message');
     const submitBtn = document.getElementById('submit-btn');
@@ -530,38 +664,39 @@
         if (response.ok) {
           statusMsg.className = "status-msg success";
           statusMsg.innerText = "Спасибо! Ваш ответ успешно отправлен.";
+          
           saveGuestLocal(name, attendance);
           rsvpForm.reset();
         } else {
-          throw new Error('Ошибка API Telegram');
+          throw new Error('Ошибка Telegram API');
         }
       } catch (err) {
         console.error(err);
         statusMsg.className = "status-msg error";
-        statusMsg.innerText = "Ошибка при отправке. Попробуйте еще раз.";
+        statusMsg.innerText = "Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.";
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerText = "Отправить ответ";
       }
     });
 
-    // Сохранение гостей
+    // Функция сохранения списка локально
     function saveGuestLocal(name, attendance) {
       let guests = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
       if (!guests.some(g => g.name.toLowerCase() === name.toLowerCase())) {
-        guests.push({ name, attendance });
+        guests.push({ name, attendance, date: new Date().toLocaleDateString() });
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(guests));
       }
       renderGuestList();
     }
 
-    // Отрисовка списка
+    // Отображение списка гостей на сайте
     function renderGuestList() {
       const container = document.getElementById('guests-container');
       const guests = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
       
       if (guests.length === 0) {
-        container.innerHTML = "Список пуст.";
+        container.innerHTML = "Список пуст. Станьте первым!";
         return;
       }
 
@@ -572,21 +707,23 @@
       `).join('');
     }
 
-    // Админ-панель
+    // Показ панели администратора
     function toggleAdminPanel() {
       const panel = document.getElementById('admin-panel');
+      
       if (panel.classList.contains('active')) {
         panel.classList.remove('active');
       } else {
-        const code = prompt("Введите код (12.05.2006):");
+        const code = prompt("Введите код доступа для просмотра списка гостей:");
         if (code === "12.05.2006") {
           panel.classList.add('active');
           renderGuestList();
         } else if (code !== null) {
-          alert("Неверный код!");
+          alert("Неверный код доступа!");
         }
       }
     }
   </script>
 </body>
 </html>
+
